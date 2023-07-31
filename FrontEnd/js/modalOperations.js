@@ -1,12 +1,10 @@
 // JavaScript
 /* ================================= */
+//const modalContainer = 
 // Creating the HTML elements dinamically
 /* ================================= */
 function createModal() {
-  const modalContainer = document.querySelector('.modal-container');
-
-  // Create the modal HTML
-  const modalHTML = `
+ document.querySelector('.modal-container').innerHTML = `
     <aside class="modal">
 				<div class="modal_wrapper">
 					<div class="modal_nav">
@@ -43,23 +41,14 @@ function createModal() {
 				</div>
     </aside>
   `;
-
-  modalContainer.innerHTML = modalHTML;
-
   attachModalEventListeners();
 }
 
 function attachModalEventListeners() {
 
-  const modalOverlay = document.querySelector('.modal_all_overlay');
-  const modal = document.querySelector('.modal');
+  document.querySelector('button').addEventListener('click', displayAddWorkModal);
 
-  const addPhotoButton = document.querySelector('button');
-  addPhotoButton.addEventListener('click', displayAddWorkModal);
-
-
-  const goBackArrow = document.querySelector('.arrow_back_icon');
-  goBackArrow.addEventListener('click', goBackModal);
+  document.querySelector('.arrow_back_icon').addEventListener('click', goBackModal);
 
   displayModalthe_gallery();
 }
@@ -70,12 +59,8 @@ createModal();
 // Modal Operations:
 /* ================================= */
 function openModal() {
-  const modalOverlay = document.querySelector('.modal_all_overlay');
-  const modal = document.querySelector('.modal');
-  modalOverlay.style.display = 'block';
-  modalOverlay.style.display = 'flex';
-  modal.style.display = 'block';
-  modal.style.display = 'flex';
+  document.querySelector('.modal_all_overlay').style.display = 'flex';
+  document.querySelector('.modal').style.display = 'flex';
 }
 
 function closeModal() {

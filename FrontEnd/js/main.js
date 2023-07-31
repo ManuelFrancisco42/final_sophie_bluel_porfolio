@@ -1,7 +1,11 @@
+// Initialization and Variables:
+let listDeTravail = [];
+let categoriesList = [];
+let activeButton = null;
+
 /* ============================================ */
 // Main Function:
 /* ============================================== */
-
 function handleCategoryButtonClick() {
   activeButton.classList.remove('active');
   this.classList.add('active');
@@ -10,32 +14,20 @@ function handleCategoryButtonClick() {
 }
 
 function handleInputUpdate(inputs) {
-  const allInputsFilled = inputs.every(function (input) {
-    return input.value !== '';
-  });
-  if (allInputsFilled) {
-    document.querySelector('#submitting_work').style.backgroundColor =
-      '#1D6154';
-  } else {
-    document.querySelector('#submitting_work').style.backgroundColor =
-      '#BFBFBF';
-  }
+  const allInputsFilled = inputs.every((input) => input.value !== '');
+  document.querySelector('#submitting_work').style.backgroundColor = `${allInputsFilled} ? #1D6154: #BFBFBF`;
 }
 
 async function fetchData() {
   const worksResponse = await fetch('http://localhost:5678/api/works');
   listDeTravail = await worksResponse.json();
 
-  const categoriesResponse = await fetch(
-    'http://localhost:5678/api/categories'
-  );
+  const categoriesResponse = await fetch('http://localhost:5678/api/categories');
   categoriesList = await categoriesResponse.json();
 }
 
 function checkAllInputsFilled(inputs) {
-  return inputs.every(function (input) {
-    return input.value !== '';
-  });
+  return inputs.every(input => input.value !== '');
 }
 
 async function main() {
@@ -60,10 +52,7 @@ async function main() {
   activeButton = buttonAll;
   displayCategories();
 
-  const categoryButtons = document.querySelectorAll('.btn-category');
-  categoryButtons.forEach(function (categoryButton) {
-    categoryButton.addEventListener('click', handleCategoryButtonClick);
-  });
+  document.querySelectorAll('.btn-category').forEach(categoryButton => categoryButton.addEventListener('click', handleCategoryButtonClick));
 
   displayWorks();
 
@@ -73,32 +62,28 @@ async function main() {
     logIn.addEventListener('click', logOut);
     switchToEditMode();
 
-    const worksEditButton = document.querySelector('.editor_btn-works');
+    const worksEditButton = document.querySelector('.editor_btn-works'); //TODO
     worksEditButton.addEventListener('click', openModal);
     displayModalthe_gallery();
 
-    const closeButtonModal = document.querySelector('.close_icon');
+    const closeButtonModal = document.querySelector('.close_icon'); //TODO
     closeButtonModal.addEventListener('click', closeModal);
 
-    const modalOverlay = document.querySelector('.modal_all_overlay');
+    const modalOverlay = document.querySelector('.modal_all_overlay'); //TODO
     modalOverlay.addEventListener('click', closeModal);
 
-    const add_photosButton = document.querySelector(
-      '.the_gallery_wrapper > button'
-    );
-    const the_galleryPhotoModal = document.querySelector(
-      '.the_gallery_wrapper'
-    );
-    const addWorkModal = document.querySelector('.add_work_to_modal');
-    const goBackArrow = document.querySelector('.arrow_back_icon');
+    const add_photosButton = document.querySelector('.the_gallery_wrapper > button');
+    const the_galleryPhotoModal = document.querySelector('.the_gallery_wrapper');//TODO
+    const addWorkModal = document.querySelector('.add_work_to_modal'); //TODO
+    const goBackArrow = document.querySelector('.arrow_back_icon'); //TODO
 
-    add_photosButton.addEventListener('click', displayAddWorkModal);
+    add_photosButton.addEventListener('click', displayAddWorkModal);//TODO
 
-    goBackArrow.addEventListener('click', goBackModal);
+    goBackArrow.addEventListener('click', goBackModal);//TODO
   }
 
-  const fileUploadInput = document.querySelector('#file');
-  fileUploadInput.addEventListener('change', previewFile);
+  const fileUploadInput = document.querySelector('#file');//TODO
+  fileUploadInput.addEventListener('change', previewFile);//TODO
 
   const formWorkCategory = document.querySelector('#category');
   const defaultOption = document.createElement('option');
@@ -107,7 +92,7 @@ async function main() {
   defaultOption.disabled = true;
   formWorkCategory.appendChild(defaultOption);
 
-  categoriesList.forEach(function (category) {
+  categoriesList.forEach(function (category) { //TODO use arrow function
     const option = document.createElement('option');
     option.value = category.name;
     option.textContent = category.name;
@@ -129,9 +114,7 @@ async function main() {
   }
 
   inputs.forEach(function (input) {
-    input.addEventListener('input', function () {
-      handleInput(input);
-    });
+    input.addEventListener('input', () => handleInput(input));
   });
 
   formAddWork.addEventListener('submit', function (e) {
