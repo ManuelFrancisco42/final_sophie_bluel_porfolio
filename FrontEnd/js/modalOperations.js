@@ -44,35 +44,26 @@ function createModal() {
     </aside>
   `;
 
-  // Append the modal to the container
   modalContainer.innerHTML = modalHTML;
 
-  // Attach event listeners to the newly created modal elements
   attachModalEventListeners();
 }
 
 function attachModalEventListeners() {
-  // Add event listeners for opening and closing the modal
+
   const modalOverlay = document.querySelector('.modal_all_overlay');
   const modal = document.querySelector('.modal');
 
-  // ... your existing openModal and closeModal functions here ...
-
-  // Add event listener for the "Ajouter une photo" button
   const addPhotoButton = document.querySelector('button');
   addPhotoButton.addEventListener('click', displayAddWorkModal);
 
-  // Add event listener for the "Back" arrow
+
   const goBackArrow = document.querySelector('.arrow_back_icon');
   goBackArrow.addEventListener('click', goBackModal);
 
-  // ... other event listeners ...
-
-  // Display the initial content for the modal_the_gallery section
   displayModalthe_gallery();
 }
 
-// Call the createModal function to generate the modal when the page loads
 createModal();
 
 /* ================================= */
