@@ -1,11 +1,11 @@
 /* ================================= */
 // Switch to Edit Mode:
 /* ================================= */
-function switchToEditMode() {
+function switchToEditModeWindows() {
   const editBanner = `
     <div class="editor_banner">
       <div>
-        <i class="fa-thin fa-pen-to-square" style="color: #ffffff;"></i>
+        <i class="fa-regular fa-pen-to-square" style="color: #ffffff;"></i>
         <p>Mode édition</p>
       </div>
       <button>publier les changements</button>
@@ -25,8 +25,8 @@ function switchToEditMode() {
     </div>
   `;
 
-  const introduction = document.querySelector('#introduction > figure');
-  introduction.insertAdjacentHTML('beforeend', pictureEditButton);
+  const porfilePicture = document.querySelector('#introduction > figure');
+  porfilePicture.insertAdjacentHTML('beforeend', pictureEditButton);
 
   const titleEditButton = `
     <div class="editor_btn editor_btn-title">
@@ -35,8 +35,8 @@ function switchToEditMode() {
     </div>
   `;
 
-  const article = document.querySelector('article');
-  article.insertAdjacentHTML('afterbegin', titleEditButton);
+  const porfileIntroduction = document.querySelector('article');
+ porfileIntroduction.insertAdjacentHTML('afterbegin', titleEditButton);
 
   const worksEditButton = `
     <div class="editor_btn editor_btn-works">
@@ -45,6 +45,6 @@ function switchToEditMode() {
     </div>
   `;
 
-  const title_the_gallery = document.querySelector('.title_the_gallery');
-  title_the_gallery.insertAdjacentHTML('beforeend', worksEditButton);
+  const titleTheGallery = document.querySelector('.title_the_gallery');
+  titleTheGallery.insertAdjacentHTML('beforeend', worksEditButton);
 }

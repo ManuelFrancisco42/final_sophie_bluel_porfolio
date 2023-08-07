@@ -1,10 +1,10 @@
-// JavaScript
 /* ================================= */
+// JavaScript
 //const modalContainer = 
 // Creating the HTML elements dinamically
 /* ================================= */
-function createModal() {
- document.querySelector('.modal-container').innerHTML = `
+ function createModalWindow() {
+  document.querySelector('.modal-container').innerHTML = `
     <aside class="modal">
 				<div class="modal_wrapper">
 					<div class="modal_nav">
@@ -41,78 +41,50 @@ function createModal() {
 				</div>
     </aside>
   `;
-  attachModalEventListeners();
-}
+  attachEventToTheModalWindow();
+} 
 
-function attachModalEventListeners() {
-
-  document.querySelector('button').addEventListener('click', displayAddWorkModal);
-
-  document.querySelector('.arrow_back_icon').addEventListener('click', goBackModal);
-
-  displayModalthe_gallery();
-}
-
-createModal();
+ function attachEventToTheModalWindow() {
+  document.querySelector('button').addEventListener('click', displayAddedWorkToModal);
+  document.querySelector('.arrow_back_icon').addEventListener('click', goBackToTheModalWindow);
+  displayModalTheToTheGallery();
+} 
 
 /* ================================= */
 // Modal Operations:
 /* ================================= */
-function openModal() {
+function openModalWindow() {
   document.querySelector('.modal_all_overlay').style.display = 'flex';
   document.querySelector('.modal').style.display = 'flex';
 }
 
-function closeModal() {
+function closeModalWindow() {
   const modalOverlay = document.querySelector('.modal_all_overlay');
-  const modal = document.querySelector('.modal');
-  const addWorkModal = document.querySelector('.add_work_to_modal');
-  const the_galleryPhotoModal = document.querySelector('.the_gallery_wrapper');
-  const formTitleInput = document.querySelector('#title');
-  const formCategoryInput = document.querySelector('#category');
-  const fileUploadInput = document.querySelector('#file');
+  document.querySelector('.modal').style.display = 'none';
+  document.querySelector('.add_work_to_modal').style.display = 'none';
+  document.querySelector('.the_gallery_wrapper').style.display = 'flex';
   const selectedPicture = document.querySelector('.selected-picture');
-  const error = document.querySelector('#error');
-
-  modal.style.display = 'none';
+  const error = document.getElementById('error');
   modalOverlay.style.display = 'none';
-  addWorkModal.style.display = 'none';
-  the_galleryPhotoModal.style.display = 'flex';
-  formTitleInput.value = '';
-  formCategoryInput.value = '';
-  fileUploadInput.value = '';
-
-  if (selectedPicture) {
-    selectedPicture.remove();
-  }
-
-  if (error) {
-    error.remove();
-  }
+  document.querySelector('form').reset();
+  selectedPicture && selectedPicture.remove();
+  error && error.remove();
 }
 
-function displayAddWorkModal() {
-  const the_galleryPhotoModal = document.querySelector('.the_gallery_wrapper');
-  const addWorkModal = document.querySelector('.add_work_to_modal');
-  const goBackArrow = document.querySelector('.arrow_back_icon');
-
-  the_galleryPhotoModal.style.display = 'none';
-  addWorkModal.style.display = 'flex';
-  goBackArrow.style.display = 'block';
+function displayAddedWorkToModal() {
+  document.querySelector('.the_gallery_wrapper').style.display = 'none';
+  document.querySelector('.add_work_to_modal').style.display = 'flex';
+  document.querySelector('.arrow_back_icon').style.display = 'block';
   document.querySelector('.modal_nav').style.justifyContent = 'space-between';
 }
 
-function goBackModal() {
-  const addWorkModal = document.querySelector('.add_work_to_modal');
-  const goBackArrow = document.querySelector('.arrow_back_icon');
-  const the_galleryPhotoModal = document.querySelector('.the_gallery_wrapper');
-  closeModal();
-  addWorkModal.style.display = 'none';
-  goBackArrow.style.display = 'none';
-  the_galleryPhotoModal.style.display = 'flex';
+function goBackToTheModalWindow() {
+  document.querySelector('.add_work_to_modal').style.display = 'none';
+  document.querySelector('.arrow_back_icon').style.display = 'none';
+  document.querySelector('.the_gallery_wrapper').style.display = 'flex'
 }
 
-function displayModalthe_gallery() {
+function displayModalTheToTheGallery() {
   const modalthe_gallery = document.querySelector('.modal_the_gallery');
   modalthe_gallery.innerHTML = '';
 
@@ -120,38 +92,46 @@ function displayModalthe_gallery() {
     const modal_work = document.createElement('div');
     modal_work.classList.add('modal-work');
 
-    const modal_workWithIconsHTML = `
+    modal_work.innerHTML = `
     <div class="modal-figure-elements">
       <img class="modal-figure" src="${work.imageUrl}" alt="${work.title}" crossorigin="anonymous">
       <img class="modal-delete" src="assets/icons/delete_icon.png" data-id="${work.id}">
     </div>
+    <p>Edit</p>
   `;
-    const modal_workEditHTML = `<p>Edit</p>`;
 
-    modal_work.innerHTML = modal_workWithIconsHTML + modal_workEditHTML;
     modalthe_gallery.appendChild(modal_work);
 
+
+
     function addModalDragIcon() {
-      const modal_workWithIcons = modal_work.querySelector(
-        '.modal-figure-elements'
-      );
+      const modal_workWithIcons = modal_work.querySelector('.modal-figure-elements');
       const modal_workDragHTML = `<img class="modal-drag" src="assets/icons/drag_icon.png">`;
       modal_workWithIcons.insertAdjacentHTML('beforeend', modal_workDragHTML);
     }
 
     function removeModalDragIcon() {
       const modal_workDrag = modal_work.querySelector('.modal-drag');
-      if (modal_workDrag) {
-        modal_workDrag.remove();
-      }
+      modal_workDrag && modal_workDrag.remove();
     }
 
     modal_work.addEventListener('mouseenter', addModalDragIcon);
     modal_work.addEventListener('mouseleave', removeModalDragIcon);
   }
 
-  listDeTravail.forEach(createModalWork);
+  arrayOfWorksLists.forEach(createModalWork);
 
-  deleteWork();
+  deleteOnlyOneWork();
   deleteAllWorks();
+   
 }
+
+createModalWindow();
+
+
+
+
+
+
+
+

@@ -1,13 +1,13 @@
 /* ================================= */
 // Display Categories:
 /* ================================= */
-function displayCategories() {
+function showCategories() {
   const categoryButtonsWrapper = document.querySelector('.categories');
   categoryButtonsWrapper.innerHTML = '';
 
   function mapCategoryToButton(category) {
     const isActive =
-      activeButton && activeButton.dataset.id === category.id.toString();
+      arrayOfActiveButtons && arrayOfActiveButtons.dataset.id === category.id.toString();
     let activeClass = '';
     if (isActive) {
       activeClass = ' active';
@@ -16,17 +16,17 @@ function displayCategories() {
     return `<button class="btn-category${activeClass}" data-id="${category.id}">${category.name}</button>`;
   }
 
-  const categoryButtonsHTML = categoriesList.map(mapCategoryToButton).join('');
+  const categoryButtonsHTML = arrayOfCategoriesLists.map(mapCategoryToButton).join('');
 
   categoryButtonsWrapper.innerHTML = `<button class="btn-category active" id="all">Tous</button>${categoryButtonsHTML}`;
 
-  function categoryButtonClickHandler(activeButton, categoryButton) {
-    if (activeButton) {
-      activeButton.classList.remove('active');
+  function categoryButtonClickHandler(arrayOfActiveButtons, categoryButton) {
+    if (arrayOfActiveButtons) {
+      arrayOfActiveButtons.classList.remove('active');
     }
     categoryButton.classList.add('active');
-    activeButton = categoryButton;
-    displayWorks();
+    arrayOfActiveButtons = categoryButton;
+    showWorksWindow();
   }
 
   function addClickEventToButton(categoryButton) {
@@ -34,7 +34,7 @@ function displayCategories() {
   }
 
   function handleClick() {
-    categoryButtonClickHandler(activeButton, this);
+    categoryButtonClickHandler(arrayOfActiveButtons, this);
   }
 
   const categoryButtons = document.querySelectorAll('.btn-category');

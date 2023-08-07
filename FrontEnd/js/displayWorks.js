@@ -1,18 +1,18 @@
 /* ================================= */
 // Display Works:
 /* ================================= */
-function displayWorks() {
-  const the_gallery = document.querySelector('.the_gallery');
-  the_gallery.innerHTML = '';
+function showWorksWindow() {
+  const theGallery = document.querySelector('.the_gallery');
+  theGallery.innerHTML = '';
 
   function filterWorks(work) {
     return (
-      activeButton.innerText === 'Tous' ||
-      activeButton.dataset.id === work.categoryId.toString()
+      arrayOfActiveButtons.innerText === 'Tous' ||
+      arrayOfActiveButtons.dataset.id === work.categoryId.toString()
     );
   }
 
-  const filteredWorks = listDeTravail.filter(filterWorks);
+  const filteredWorks = arrayOfWorksLists.filter(filterWorks);
 
   function createWorkElement(work) {
     const workElementHTML = `
@@ -22,7 +22,7 @@ function displayWorks() {
     </figure>
   `;
 
-    the_gallery.insertAdjacentHTML('beforeend', workElementHTML);
+    theGallery.insertAdjacentHTML('beforeend', workElementHTML);
   }
 
   filteredWorks.forEach(createWorkElement);

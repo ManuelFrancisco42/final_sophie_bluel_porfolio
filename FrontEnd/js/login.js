@@ -1,5 +1,4 @@
 // JavaScript
-console.log('je recupere le formulaire ');
 async function login() {
   const form = document.querySelector('.login-form');
   const emailInput = form.querySelector('input[type="email"]');
@@ -34,9 +33,9 @@ async function login() {
       loginStatus.appendChild(logIn);
       location.replace('index.html');
     } else {
-      const forgotPasswordLink = document.querySelector('#login a');//TODO
-      const loginSection = document.getElementById('login');//TODO
-      loginSection.insertBefore(error, forgotPasswordLink);//TODO
+      const forgotPasswordLink = document.getElementById('login a');
+      const loginSection = document.getElementById('login');
+      loginSection.insertBefore(error, forgotPasswordLink);
       error.style.display = 'block';
     }
   } catch (error) {
@@ -51,9 +50,8 @@ function handleFormSubmit(e) {
 }
 
 function onDOMContentLoaded() {
-  const form = document.querySelector('.login-form'); //TODO
-  console.log(form);//TODO
-  form.addEventListener('submit', handleFormSubmit); //TODO
+  document.querySelector('.login-form').addEventListener('submit', handleFormSubmit);
 }
 
 document.addEventListener('DOMContentLoaded', onDOMContentLoaded);
+

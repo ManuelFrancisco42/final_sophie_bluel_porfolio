@@ -2,7 +2,7 @@
 // Delete Works:
 /* ================================= */
 
-function deleteWork() {
+function deleteOnlyOneWork() {
   const trashIcons = document.querySelectorAll('.modal-delete');
 
   function handleDeleteClick(trashIcon) {
@@ -21,14 +21,14 @@ function deleteWork() {
       if (response.ok) {
         trashIcon.closest('.modal-work').remove();
 
-        listDeTravail = listDeTravail.filter(function (work) {
+        arrayOfWorksLists = arrayOfWorksLists.filter(function (work) {
           return work.id !== id;
         });
 
-        if (listDeTravail.length < 1) {
-          closeModal();
+        if (arrayOfWorksLists.length < 1) {
+          closeModalWindow();
         }
-        displayWorks();
+        showWorksWindow();
       }
     }
 
@@ -68,10 +68,10 @@ function deleteAllWorks() {
 
     function handleDeleteResponse(response) {
       if (response.ok) {
-        listDeTravail = [];
-        displayWorks();
-        displayModalthe_gallery();
-        closeModal();
+        arrayOfWorksLists = [];
+        showWorksWindow();
+        displayModalTheToTheGallery();
+        closeModalWindow();
       }
     }
 
@@ -79,7 +79,7 @@ function deleteAllWorks() {
       console.error(error);
     }
 
-    listDeTravail.forEach(function (work) {
+    arrayOfWorksLists.forEach(function (work) {
       deleteWorkAPI(work).then(handleDeleteResponse).catch(handleDeleteError);
     });
   }
