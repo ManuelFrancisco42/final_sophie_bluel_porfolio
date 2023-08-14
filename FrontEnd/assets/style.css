@@ -516,7 +516,7 @@ a {
 
 #error {
 	color: #9A0026;
-	margin-top: -10px;
+	margin-top: 10px;
 }
 
 #login_Link {

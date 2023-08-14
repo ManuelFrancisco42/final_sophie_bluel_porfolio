@@ -1,7 +1,7 @@
 /* ================================= */
 // JavaScript
 //const modalContainer = 
-// Creating the HTML elements dinamically
+// Creating the HTML elements dynamically
 /* ================================= */
  function createModalWindow() {
   document.querySelector('.modal-container').innerHTML = `
@@ -78,10 +78,18 @@ function displayAddedWorkToModal() {
   document.querySelector('.modal_nav').style.justifyContent = 'space-between';
 }
 
+ 
 function goBackToTheModalWindow() {
   document.querySelector('.add_work_to_modal').style.display = 'none';
   document.querySelector('.arrow_back_icon').style.display = 'none';
-  document.querySelector('.the_gallery_wrapper').style.display = 'flex'
+  document.querySelector('.the_gallery_wrapper').style.display = 'flex';
+
+  
+  const selectedPicture = document.querySelector('.selected-picture');
+  if (selectedPicture) {
+    selectedPicture.remove();
+    showAddPhotoElements();
+  }
 }
 
 function displayModalTheToTheGallery() {
@@ -101,8 +109,6 @@ function displayModalTheToTheGallery() {
   `;
 
     modalthe_gallery.appendChild(modal_work);
-
-
 
     function addModalDragIcon() {
       const modal_workWithIcons = modal_work.querySelector('.modal-figure-elements');

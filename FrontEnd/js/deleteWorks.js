@@ -2,61 +2,50 @@
 // Delete Works:
 /* ================================= */
 
+/* ////////////////////////////////////////////// */
+
 function deleteOnlyOneWork() {
   const trashIcons = document.querySelectorAll('.modal-delete');
 
-  function handleDeleteClick(trashIcon) {
-    const id = trashIcon.dataset.id;
+  trashIcons.forEach((trashIcon) => {
+    trashIcon.addEventListener('click', () => {
+      let id = trashIcon.dataset.id;
 
-    function deleteWorkAPI() {
-      return fetch(`http://localhost:5678/api/works/${id}`, {
+      fetch(`http://localhost:5678/api/works/${id}`, {
         method: 'DELETE',
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem('user')}`,
         },
-      });
-    }
+      }).then((response) => {
+        if (response.ok) {
+          trashIcon.closest('.modal-work').remove();
 
-    function handleDeleteResponse(response) {
-      if (response.ok) {
-        trashIcon.closest('.modal-work').remove();
+          // Remove the deleted work item from the arrayOfWorksLists array
+          for (let i = 0; i < arrayOfWorksLists.length; i++) {
+            if (arrayOfWorksLists[i].id == id) {
+              arrayOfWorksLists.splice(i, 1);
 
-        arrayOfWorksLists = arrayOfWorksLists.filter(function (work) {
-          return work.id !== id;
-        });
-
-        if (arrayOfWorksLists.length < 1) {
-          closeModalWindow();
+              // If there are no more works, close the modal
+              if (arrayOfWorksLists.length < 1) {
+                closeModal();
+              }
+            }
+            // Refresh the works displayed in the the_gallery
+            showWorksWindow();
+          }
         }
-        showWorksWindow();
-      }
-    }
-
-    function handleDeleteError(error) {
-      console.error(error);
-    }
-
-    deleteWorkAPI().then(handleDeleteResponse).catch(handleDeleteError);
-  }
-
-  function addClickEventToTrashIcon(trashIcon) {
-    trashIcon.addEventListener('click', handleClick);
-  }
-
-  function handleClick() {
-    handleDeleteClick(this);
-  }
-
-  trashIcons.forEach(addClickEventToTrashIcon);
+      });
+    });
+  });
 }
+/* ////////////////////////////////////////////// */
+
 
 function deleteAllWorks() {
-  const deleteAllWorksButton = document.querySelector(
-    '.delete_from_the_gallery'
-  );
+  const deleteAllWorksButton = document.querySelector('.delete_from_the_gallery');
 
   function handleDeleteAllClick() {
-    function deleteWorkAPI(work) {
+    const deleteWorkAPI = (work) => {
       const id = work.id;
       return fetch(`http://localhost:5678/api/works/${id}`, {
         method: 'DELETE',
@@ -64,14 +53,18 @@ function deleteAllWorks() {
           Authorization: `Bearer ${sessionStorage.getItem('user')}`,
         },
       });
-    }
-
-    function handleDeleteResponse(response) {
+    };
+              
+    function handleDeleteAllResponse(response) {
       if (response.ok) {
+        const deletedWorkIds = arrayOfWorksLists.map((work) => work.id);
+        deletedWorkIds.forEach(updateGalleryAfterDelete);
         arrayOfWorksLists = [];
-        showWorksWindow();
+
         displayModalTheToTheGallery();
         closeModalWindow();
+
+        showWorksWindow();
       }
     }
 
@@ -79,11 +72,12 @@ function deleteAllWorks() {
       console.error(error);
     }
 
-    arrayOfWorksLists.forEach(function (work) {
-      deleteWorkAPI(work).then(handleDeleteResponse).catch(handleDeleteError);
-    });
+    Promise.all(arrayOfWorksLists.map(deleteWorkAPI))
+      .then((responses) => Promise.all(responses.map(handleDeleteAllResponse)))
+      .catch(handleDeleteError);
   }
 
   deleteAllWorksButton.addEventListener('click', handleDeleteAllClick);
 }
+
 

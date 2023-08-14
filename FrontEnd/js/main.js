@@ -8,7 +8,6 @@ function categoryButtonClickhandler() {
   showWorksWindow();
 }
 
-
 function inputUpdatehandler(inputs) {
   const allInputsFilled = inputs.every((input) => input.value !== '');
   const button = document.querySelector('#submitting_work');
@@ -112,7 +111,7 @@ async function main() {
   });
 
   formAddWork.addEventListener('submit', function (e) {
-    e.preventDefault();
+     e.preventDefault();
 
     let errorHappened = false;
 
@@ -148,6 +147,7 @@ async function main() {
           }
         }
       })
+
       .then(function (data) {
         if (!errorHappened) {
           arrayOfWorksLists.push(data);
