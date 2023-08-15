@@ -1,4 +1,7 @@
-// JavaScript
+/* ================================= */
+// JavaScript:
+/* ================================= */
+
 async function login() {
   const form = document.querySelector('.login-form');
   const emailInput = form.querySelector('input[type="email"]');

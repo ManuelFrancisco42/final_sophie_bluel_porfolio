@@ -40,7 +40,7 @@ async function main() {
   categoryButtonsWrapper.classList.add('categories');
 
   portfolio.insertBefore(categoryButtonsWrapper, theGallery);
-
+  
   const buttonAll = document.createElement('button');
   buttonAll.classList.add('btn-category');
   buttonAll.setAttribute('id', 'all');
@@ -49,7 +49,7 @@ async function main() {
 
   buttonAll.classList.add('active');
   arrayOfActiveButtons = buttonAll;
-  showCategories();
+  showCategories(logged);
 
   document.querySelectorAll('.btn-category').forEach(categoryButton => categoryButton.addEventListener('click', categoryButtonClickhandler));
 

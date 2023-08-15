@@ -1,7 +1,8 @@
 /* ================================= */
 // Display Categories:
 /* ================================= */
-function showCategories() {
+
+function showCategories(logged) {
   const categoryButtonsWrapper = document.querySelector('.categories');
   categoryButtonsWrapper.innerHTML = '';
 
@@ -16,9 +17,14 @@ function showCategories() {
     return `<button class="btn-category${activeClass}" data-id="${category.id}">${category.name}</button>`;
   }
 
-  const categoryButtonsHTML = arrayOfCategoriesLists.map(mapCategoryToButton).join('');
+  let categoryButtonsHTML = '';
 
-  categoryButtonsWrapper.innerHTML = `<button class="btn-category active" id="all">Tous</button>${categoryButtonsHTML}`;
+  if (!logged) {
+    categoryButtonsHTML = arrayOfCategoriesLists.map(mapCategoryToButton).join('');
+    categoryButtonsHTML = `<button class="btn-category active" id="all">Tous</button>${categoryButtonsHTML}`;
+  }
+
+  categoryButtonsWrapper.innerHTML = categoryButtonsHTML;
 
   function categoryButtonClickHandler(arrayOfActiveButtons, categoryButton) {
     if (arrayOfActiveButtons) {
@@ -40,3 +46,4 @@ function showCategories() {
   const categoryButtons = document.querySelectorAll('.btn-category');
   categoryButtons.forEach(addClickEventToButton);
 }
+

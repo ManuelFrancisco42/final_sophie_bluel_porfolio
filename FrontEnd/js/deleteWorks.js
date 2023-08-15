@@ -2,8 +2,6 @@
 // Delete Works:
 /* ================================= */
 
-/* ////////////////////////////////////////////// */
-
 function deleteOnlyOneWork() {
   const trashIcons = document.querySelectorAll('.modal-delete');
 
@@ -38,8 +36,6 @@ function deleteOnlyOneWork() {
     });
   });
 }
-/* ////////////////////////////////////////////// */
-
 
 function deleteAllWorks() {
   const deleteAllWorksButton = document.querySelector('.delete_from_the_gallery');

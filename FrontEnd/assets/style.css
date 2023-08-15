@@ -822,6 +822,7 @@ a {
 	font-style: normal;
 	color: #D65353;
 	cursor: pointer;
+	height: -webkit-fill-available;
 }
 
 .add_work_to_modal {

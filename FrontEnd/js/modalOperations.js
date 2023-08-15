@@ -1,5 +1,4 @@
 /* ================================= */
-// JavaScript
 //const modalContainer = 
 // Creating the HTML elements dynamically
 /* ================================= */
